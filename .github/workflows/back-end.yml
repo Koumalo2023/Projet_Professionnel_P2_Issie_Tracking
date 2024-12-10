@@ -1,0 +1,47 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: CI Backend
+
+on:
+  push:
+    paths:
+      - 'backend/**'
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: devUser
+          POSTGRES_PASSWORD: Tefong006
+          POSTGRES_DB: IssueTracking_Dev_DB
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        working-directory: backend
+        run: dotnet restore
+
+      - name: Build the API
+        working-directory: backend
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Run unit tests
+        working-directory: backend
+        run: dotnet test --no-build --verbosity normal
