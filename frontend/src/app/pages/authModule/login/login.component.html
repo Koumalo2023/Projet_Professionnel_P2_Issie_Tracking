@@ -1,0 +1,73 @@
+<div class="auth-main">
+    <div class="auth-wrapper">
+      <div class="auth-form">
+        <div class="card my-5">
+          <div class="card-body">
+            <div class="text-center">
+              <h2 class="text-secondary"><b>Connexion</b></h2>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <!-- Champ Email -->
+              <div class="form-floating mb-3">
+                <input type="email" id="userName" formControlName="userName" class="form-control" placeholder="Email">
+                <label for="userName">Email</label>
+                <div *ngIf="getErrorMessage('userName', 'required')" class="text-danger">
+                  <small>Email requis.</small>
+                </div>
+                <div *ngIf="getErrorMessage('userName', 'email')" class="text-danger">
+                  <small>Email invalide.</small>
+                </div>
+              </div>
+  
+              <!-- Champ Mot de passe -->
+              <div class="form-floating mb-3 position-relative">
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  formControlName="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Mot de passe"
+                />
+                <label for="password">Mot de passe</label>
+                <button
+                  type="button"
+                  class="btn position-absolute top-0 end-0"
+                  style="border: none; background: transparent;"
+                  (click)="togglePasswordVisibility()"
+                >
+                  <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                </button>
+                <div *ngIf="getErrorMessage('password', 'required')" class="text-danger">
+                    <small>Mot de passe requis.</small>
+                  </div>
+                  <div *ngIf="getErrorMessage('password', 'minlength')" class="text-danger">
+                    <small>Le mot de passe doit contenir au moins 8 caractères.</small>
+                  </div>
+              </div>
+  
+              <!-- Bouton Connexion -->
+              <button type="submit" class="btn btn-primary w-100" [disabled]="loading || loginForm.invalid">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></span>
+                Connexion
+              </button>
+
+              <!-- <button type="submit" class="btn btn-primary w-100" [disabled]="loading || loginForm.invalid">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Connexion
+              </button> -->
+              <div *ngIf="errorMessage" class="alert alert-danger mt-2">{{ errorMessage }}</div>
+            </form>
+  
+            <!-- Liens d'aide -->
+            <div class="mt-3 text-center">
+              <a href="/forgot-password">Mot de passe oublié ?</a>
+            </div>
+            <div class="mt-3 text-center">
+              <a href="/register">Vous n'avez pas de compte ? Inscrivez-vous</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

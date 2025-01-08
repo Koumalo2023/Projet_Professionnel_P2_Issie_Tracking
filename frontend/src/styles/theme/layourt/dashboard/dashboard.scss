@@ -1,0 +1,32 @@
+.wrapper {
+  @include flex(row);
+  align-items: stretch;
+  width: 100%;
+  overflow-y: scroll;
+  opacity: 1;
+
+  .main {
+    @include flex(column);
+    min-height: 100vh;
+    width: 100%;
+    @include transition(all, 0.35s);
+
+    .content {
+      flex: 1;
+      max-width: 100vw;
+      padding: $spacing-unit;
+      box-shadow: $box-shadow-base;
+      border-radius: 10px;
+      background: $backgroundColorl2;
+
+      @media (min-width: 768px) {
+        max-width: auto;
+        width: auto;
+      }
+    }
+
+    .footer {
+      background-color: $first-color;
+    }
+  }
+}

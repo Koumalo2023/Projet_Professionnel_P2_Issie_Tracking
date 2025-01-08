@@ -1,0 +1,20 @@
+.site-footer {
+  background-color: $body-bg-color;
+    color: $white-color;
+    padding: $spacing-sm;
+    text-align: center;
+  
+    p {
+      @include typography($font-size-small);
+    }
+  
+    .footer-nav {
+      margin-top: $spacing-xs;
+  
+      a {
+        margin: 0 $spacing-sm;
+        @include link-styles($white-color, lighten($dark-color, 20%));
+      }
+    }
+  }
+  

@@ -1,0 +1,179 @@
+@import '../settings/variables';
+
+// ============================
+//     Card css start
+// ============================
+
+.card {
+  margin-bottom: 24px;
+  transition: box-shadow 0.2s ease-in-out;
+  box-shadow: var(--pc-card-box-shadow);
+  border: none;
+
+  .card-header {
+    border-bottom: 1px solid var(--bs-card-border-color);
+
+    h5 {
+      margin-bottom: 0;
+      color: $headings-color;
+      font-size: 14px;
+      font-weight: 500;
+
+      + p,
+      + small {
+        margin-top: 5px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  .card-footer {
+    transition: box-shadow 0.2s ease-in-out;
+    border-top: 1px solid $border-color;
+  }
+}
+
+.widget-data,
+.widget-chart,
+.widget-statistics,
+.dashboard-analytics {
+  .card {
+    .card-header {
+      h5 {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.user-profile-card {
+  .card {
+    .card-header {
+      h5 {
+        font-size: 20px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .card {
+    margin-bottom: 20px;
+    .card-header {
+      padding: 20px;
+      h5 {
+        font-size: 0.875rem;
+      }
+    }
+    .card-body {
+      padding: 20px;
+    }
+  }
+}
+
+// Card css end
+
+
+//*****************************************************
+  // Mixins pour les Cartes (Cards)
+//***************************************************** 
+@mixin card-styles($bg-color, $padding: 1rem, $border-radius: 8px, $box-shadow: $box-shadow-base) {
+    @extend .card;
+    background-color: $bg-color;
+    border-radius: $border-radius;
+    padding: $padding;
+    box-shadow: $box-shadow;
+    transition: box-shadow 0.3s ease;
+  
+    &:hover {
+      box-shadow: 0 6px 12px rgba(129, 30, 30, 0.1);
+    }
+  }
+  
+  // Exemple d'utilisation pour une petite carte
+  .small-card {
+    @include card-styles($small-card-bg);
+  }
+  
+  // Exemple d'utilisation pour une grande carte
+  .large-card {
+    @include card-styles($large-card-bg, 2rem);
+  }
+  
+  // Card Affiche Classique
+  @mixin card-affiche-classique($bg-color: $small-card-bg, $text-color: $dark-color, $border-radius: 8px, $padding: 1.5rem) {
+    background-color: $bg-color;
+    color: $text-color;
+    border-radius: $border-radius;
+    padding: $padding;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  
+    .affiche-image {
+      width: 100%;
+      height: auto;
+      border-radius: $border-radius;
+    }
+  
+    .movie-title {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: $text-color;
+    }
+  
+    .release-date {
+      font-size: 0.875rem;
+      color: lighten($text-color, 20%);
+    }
+  }
+  
+  // Exemple d'utilisation
+  .card-affiche-classique {
+    @include card-affiche-classique();
+  }
+  
+  
+  //Card Affiche Moderne
+  @mixin card-affiche-moderne($bg-color: $large-card-bg, $text-color: $white-color, $hover-color: $third-color, $border-radius: 8px) {
+    background-color: $bg-color;
+    border-radius: $border-radius;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+  
+    .affiche-image {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+  
+    .movie-details {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: $text-color;
+      padding: 1rem;
+      font-size: 1rem;
+    }
+  
+    &:hover .affiche-image {
+      transform: scale(1.05);
+    }
+  
+    &:hover .movie-details {
+      background-color: rgba($hover-color, 0.8);
+    }
+  }
+  
+  // Exemple d'utilisation
+  .card-affiche-moderne {
+    @include card-affiche-moderne();
+  }
+
+

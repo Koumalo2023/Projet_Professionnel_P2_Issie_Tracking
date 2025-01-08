@@ -1,0 +1,34 @@
+.home-main {
+    min-height: 80vh;
+    padding: $spacing-md;
+    background-color: $body-bg-color-second;
+  
+    .home-content {
+      @include flex-center(column);
+      text-align: center;
+      background-color: $body-bg-color-second;
+      
+      h1 {
+        @include heading-styles(2.5rem, 700, 1.2, $second-color);
+      }
+  
+      p {
+        @include paragraph-styles(1rem, 1.6, $white-color);
+      }
+  
+      .explore-button {
+        background-color: $button-green-type2;
+        color: $white-color;
+        padding: $spacing-sm $spacing-md;
+        border: none;
+        border-radius: $border-radius;
+        cursor: pointer;
+        @include transition(background-color, 0.3s, ease);
+  
+        &:hover {
+          background-color: lighten($button-green-type2, 10%);
+        }
+      }
+    }
+  }
+  

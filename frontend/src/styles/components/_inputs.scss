@@ -1,0 +1,190 @@
+@import '../settings/variables';
+//*****************************************************
+  // Mixins pour les Inputs et Floating Labels
+//*****************************************************
+@mixin input-text-styles(
+  $bg-color: $white-color, 
+  $border-color: $third-color,  // Changement de la couleur de la bordure par défaut à $third-color
+  $focus-color: $second-color, 
+  $text-color: $dark-color
+) {
+  background-color: $bg-color;
+  border: 1px solid $border-color;
+  padding: 0.75rem;
+  color: $text-color;
+  font-size: 1rem;
+  border-radius: $border-radius;
+
+  &:focus {
+    outline: none;
+    border-color: $focus-color; // Couleur de la bordure lors du focus
+    box-shadow: 0 0 0 0.2rem rgba($focus-color, 0.25); // Ajouter une légère ombre colorée
+  }
+
+  &::placeholder {
+    color: lighten($text-color, 40%);
+  }
+}
+
+@mixin floating-label {
+  position: relative;
+
+  label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: $gray-dark;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+  }
+
+  input {
+    border-color: $third-color; // Bordure par défaut en $third-color
+    &:focus {
+      border-color: $second-color; // Bordure lors du focus en $second-color
+      box-shadow: 0 0 0 0.2rem rgba($second-color, 0.25); // Ajout de l'ombre colorée
+    }
+
+    &:focus + label,
+    &:not(:placeholder-shown) + label {
+      top: 0.25rem;
+      left: 1rem;
+      font-size: 0.75rem;
+      color: $second-color; // Changement de la couleur du label lors du focus
+    }
+  }
+}
+  // Exemple d'utilisation pour un input avec floating label
+  .input-text {
+    @include input-text-styles();
+    @include floating-label;
+  }
+  
+
+//*****************************************************
+   // Checkbox-styles avec styles pour le label
+//***************************************************** 
+@mixin checkbox-styles {
+  @extend .form-check-input;
+  width: 30px;
+  height: 30px;
+  border: 1px solid $gray-dark;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+
+  &:checked {
+    background-color: $second-color;
+    border-color: $third-color;
+  }
+
+  // Styles pour le label associé
+  + .form-check-label {
+    font-size: 1rem;
+    color: $dark-color;
+    margin-left: 0.75rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $third-color;
+    }
+  }
+}
+
+//*****************************************************
+// Radio-styles avec styles pour le label
+//***************************************************** 
+@mixin radio-styles {
+  @extend .form-check-input;
+  width: 30px;
+  height: 30px;
+  border: 1px solid $gray-dark;
+  border-radius: 50%;  // Les radios sont toujours circulaires
+  cursor: pointer;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+
+  &:checked {
+    background-color: $second-color;
+    border-color: $third-color;
+  }
+
+  // Styles pour le label associé
+  + .form-check-label {
+    font-size: 1rem;
+    color: $dark-color;
+    margin-left: 0.75rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $third-color;
+    }
+  }
+}
+
+//*****************************************************
+// Textarea-styles
+//***************************************************** 
+@mixin textarea-styles {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid $third-color;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  color: $dark-color;
+  background-color: $white-color;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $second-color;
+    box-shadow: 0 0 0 0.2rem rgba($second-color, 0.25);
+  }
+
+  &::placeholder {
+    color: lighten($dark-color, 40%);
+  }
+}
+
+.textarea-custom {
+  @include textarea-styles();
+}  
+  
+//*****************************************************
+  // Mixins pour les Sélecteurs (Selects)
+//***************************************************** 
+@mixin select-styles($border-color: $gray-light, $focus-color: $third-color, $bg-color: $white-color, $text-color: $dark-color) {
+  @extend .form-select;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  background-color: $bg-color;
+  color: $text-color;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  // Placeholder support pour les selects sans valeur initiale
+  &:not([multiple]) {
+    height: auto;
+  }
+
+  &:focus {
+    border-color: $focus-color;
+    box-shadow: 0 0 5px rgba($focus-color, 0.3);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: lighten($text-color, 40%);
+  }
+}
+// Exemple d'utilisation pour un select
+.custom-select {
+  @include select-styles();
+}
+.select-custom {
+  @include select-styles();
+}

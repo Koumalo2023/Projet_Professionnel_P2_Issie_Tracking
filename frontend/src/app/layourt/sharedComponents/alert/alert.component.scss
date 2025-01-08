@@ -1,0 +1,75 @@
+// Styles de base pour l'alerte
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+    // z-index: 1001;
+  
+    &.hidden {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    
+    &.alert-dismissible {
+      padding-right: 2.5rem;
+    }
+  
+    // Couleurs des alertes
+    &.alert-success {
+      background-color: #28a745;
+    }
+  
+    &.alert-danger {
+      background-color: #dc3545;
+    }
+  
+    &.alert-warning {
+      background-color: #ffc107;
+      color: #212529;
+    }
+  
+    &.alert-info {
+      background-color: #17a2b8;
+    }
+  
+    // Bouton de fermeture
+    .btn-close {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: inherit;
+      cursor: pointer;
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      outline: none;
+  
+      &:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+  
+  // Responsive
+  @media (max-width: 768px) {
+    .alert {
+      width: 90%;
+      left: 50%;
+      transform: translateX(-50%);
+      right: auto;
+      top: 10px;
+    }
+  }
+  

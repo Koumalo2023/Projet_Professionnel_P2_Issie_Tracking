@@ -1,0 +1,40 @@
+@import '../settings/variables';
+
+
+
+//*****************************************************
+  // Mixins pour les Tableaux
+//***************************************************** 
+@mixin table-styles($border-color: $gray-light) {
+  @extend .table;
+  border: 1px solid $border-color;
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 0.75rem;
+    border: 1px solid $border-color;
+  }
+
+  th {
+    background-color: $third-color;
+    color: $white-color;
+  }
+
+  tr:nth-child(even) {
+    background-color: lighten($gray-light, 40%);
+  }
+
+  tr:hover {
+    background-color: $gray-light;
+  }
+}
+
+// Exemple d'utilisation pour un tableau
+.custom-table {
+  @include table-styles();
+}
+
+.custom-table {
+    @include table-styles($border-color: $gray-light);
+  }

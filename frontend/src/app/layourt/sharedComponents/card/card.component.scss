@@ -1,0 +1,76 @@
+@import '../../../../styles/settings/variables';
+// ============================
+//     Card css start
+// ============================
+
+.card {
+    margin-bottom: 24px;
+    transition: box-shadow 0.2s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+  
+    .card-header {
+      border-bottom: 1px solid;
+  
+      h5 {
+        margin-bottom: 0;
+        color: $black;
+        font-size: 14px;
+        font-weight: 500;
+  
+        + p,
+        + small {
+          margin-top: 5px;
+  
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+    .card-footer {
+      transition: box-shadow 0.2s ease-in-out;
+      border-top: 1px solid ;
+    }
+  }
+  
+  .widget-data,
+  .widget-chart,
+  .widget-statistics,
+  .dashboard-analytics {
+    .card {
+      .card-header {
+        h5 {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  
+  .user-profile-card {
+    .card {
+      .card-header {
+        h5 {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  
+  // @include media-breakpoint-down(sm) {
+  //   .card {
+  //     margin-bottom: 20px;
+  //     .card-header {
+  //       padding: 20px;
+  //       h5 {
+  //         font-size: 0.875rem;
+  //       }
+  //     }
+  //     .card-body {
+  //       padding: 20px;
+  //     }
+  //   }
+  // }
+  
+  // Card css end

@@ -1,0 +1,23 @@
+<aside id="sidebar" [ngClass]="{ 'hidden': isSidebarHidden }" class="js-sidebar">
+  <div class="h-100">
+    <!-- Sidebar Logo -->
+    <div class="sidebar-logo">
+      <a href="#">Tableau de bord</a>
+    </div>
+    
+    <!-- Navigation List -->
+    <ul class="sidebar-nav">
+      <!-- Iterate through NAVIGATION_ITEMS -->
+      <li *ngFor="let item of navigationItems" class="sidebar-item">
+        <!-- Sidebar Item without children -->
+        <a [routerLink]="item.route" class="sidebar-link" *ngIf="!item.children">
+          <i [class]="item.icon + ' pe-2'"></i> {{ item.title }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+  
+
+

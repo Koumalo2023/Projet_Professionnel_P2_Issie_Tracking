@@ -1,0 +1,86 @@
+<div class="auth-main">
+    <div class="auth-wrapper">
+        <div class="auth-form">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <div class="text-center">
+                        <h2 class="text-secondary"><b>Inscription</b></h2>
+                    </div>
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <!-- Champ Nom d'utilisateur (Email) -->
+                        <div class="form-floating mb-3">
+                            <input type="email" formControlName="userName" class="form-control" id="userName"
+                                placeholder="Nom d'utilisateur">
+                            <label for="userName">Nom d'utilisateur (Email)</label>
+                            <div *ngIf="getErrorMessage('userName', 'required')" class="text-danger">
+                                <small>L'adresse Email est obligatoire.</small>
+                            </div>
+                            <div *ngIf="getErrorMessage('userName', 'email')" class="text-danger">
+                                <small>L'adresse Email est invalide.</small>
+                            </div>
+                        </div>
+
+                        <!-- Champ Prénom -->
+                        <div class="form-floating mb-3">
+                            <input type="text" formControlName="firstName" class="form-control" id="firstName"
+                                placeholder="Prénom">
+                            <label for="firstName">Prénom</label>
+                            <div *ngIf="getErrorMessage('firstName', 'required')" class="text-danger">
+                                <small>Le prénom est obligatoire.</small>
+                            </div>
+                        </div>
+
+                        <!-- Champ Nom de famille -->
+                        <div class="form-floating mb-3">
+                            <input type="text" formControlName="lastName" class="form-control" id="lastName"
+                                placeholder="Nom de famille">
+                            <label for="lastName">Nom de famille</label>
+                            <div *ngIf="getErrorMessage('lastName', 'required')" class="text-danger">
+                                <small>Le nom est obligatoire.</small>
+                            </div>
+                        </div>
+
+                        <!-- Champ Mot de passe -->
+                        <div class="form-floating mb-3 position-relative">
+                            <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                                class="form-control" id="password" placeholder="Mot de passe" />
+                            <label for="password">Mot de passe</label>
+                            <button type="button" class="btn position-absolute top-0 end-0"
+                                style="border: none; background: transparent;" (click)="togglePasswordVisibility()">
+                                <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                            </button>
+                            <small *ngIf="showPasswordCriteria" class="text-muted">
+                                Doit contenir au moins 8 caractères, une majuscule, une minuscule, et un caractère spécial.
+                            </small>
+                            <div *ngIf="getErrorMessage('password', 'required')" class="text-danger">
+                                <small>Le mot de passe est obligatoire.</small>
+                            </div>
+                        </div>
+
+                        <!-- Confirmation de Mot de passe -->
+                        <div class="form-floating mb-3">
+                            <input [type]="showPassword ? 'text' : 'password'"
+                                formControlName="confirmPassword" class="form-control" id="confirmPassword"
+                                placeholder="Confirmer le mot de passe">
+                            <label for="confirmPassword">Confirmer le mot de passe</label>
+                            <div *ngIf="getErrorMessage('confirmPassword', 'required')" class="text-danger">
+                                <small>La confirmation de mot de passe est obligatoire.</small>
+                            </div>
+                            <div *ngIf="registerForm.hasError('mismatch')" class="text-danger">
+                                <small>Les mots de passe ne correspondent pas.</small>
+                            </div>
+                        </div>
+
+                        <!-- Bouton d'inscription -->
+                        <button type="submit" class="btn btn-secondary w-100" [disabled]="!isFormValid">S'inscrire</button>
+                    </form>
+
+                    <!-- Lien de connexion -->
+                    <div class="mt-3 text-center">
+                        <a routerLink="/login">Vous avez déjà un compte ? Connectez-vous</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

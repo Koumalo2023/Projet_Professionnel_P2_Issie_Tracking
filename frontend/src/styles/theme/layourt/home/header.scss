@@ -1,0 +1,241 @@
+.site-header {
+  @include flex(row, space-between, center);
+  background-color: $first-color;
+  padding: $spacing-sm;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  .header-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $dark-color;
+
+    a {
+      @include link-styles($white-color, lighten($white-color, 15%), darken($white-color, 10%));
+    }
+  }
+
+  .header-search {
+    @include flex(row, flex-start, center);
+    margin-right: $spacing-md;
+    position: relative;
+    color: lighten($third-color, 5%);
+
+    .search-input {
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 30px;
+      background-color: lighten($dark-color, 35%);
+      color: $white-color;
+      min-width: 50%;
+      transition: width 0.3s ease-in-out;
+
+      &:focus {
+        outline: none;
+        width: 250px;
+        color: $third-color;
+      }
+
+      &:hover {
+        background-color: lighten($button-green-type1, 10%);
+        color: lighten($third-color, 5%);
+      }
+    }
+
+    .search-btn {
+      background: none;
+      border: none;
+      color: $white-color;
+      font-size: 1.75rem;
+      position: absolute;
+      right: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        color: lighten($third-color, 5%);
+      }
+
+    }
+  }
+
+  .header-nav {
+    ul {
+      @include flex(row);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin-left: $spacing-md;
+        background-color: $third-color;
+        border-radius: 30px;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          background-color: lighten($third-color, 10%);
+        }
+
+        a {
+          @include link-styles($white-color, lighten($third-color, 5%));
+          padding: 0.3rem 1rem;
+          display: flex;
+          align-items: center;
+          border-radius: 30px;
+          // transition: background-color 0.3s, color 0.3s;
+
+          &:hover {
+            background-color: lighten($third-color, 10%);
+
+            i {
+              color: lighten($white-color, 5%);
+            }
+          }
+
+          i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+          }
+        }
+
+        .dropdown-toggle {
+          cursor: pointer;
+        }
+
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          background-color: $dark-color;
+          border-radius: 10px;
+          padding: $spacing-sm;
+          list-style: none;
+
+          li {
+            margin-bottom: $spacing-xs;
+
+            a {
+              color: $white-color;
+              display: block;
+              padding: $spacing-xs;
+              border-radius: 10px;
+              text-decoration: none;
+
+              &:hover {
+                background-color: lighten($button-green-type1, 10%);
+              }
+            }
+          }
+
+          &.show {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    color: $dark-color;
+
+    @include respond-to(medium) {
+      display: block;
+    }
+  }
+}
+
+.mobile-nav {
+  display: none;
+  background-color: $first-color;
+  padding: $spacing-sm;
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  left: 0;
+  z-index: 100;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      margin-bottom: $spacing-sm;
+
+      a {
+        color: $white-color !important;
+        text-decoration: none;
+        padding: $spacing-sm;
+        display: block;
+        border-radius: 10px;
+        background-color: lighten($dark-color, 35%);
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: lighten($button-green-type1, 10%);
+
+          i {
+            color: lighten($third-color, 5%);
+          }
+        }
+
+        i {
+          margin-right: 0.5rem;
+          font-size: 1.5rem;
+        }
+      }
+
+      .mobile-submenu {
+        list-style: none;
+        margin-top: $spacing-xs;
+
+        li {
+          a {
+            display: block;
+            padding: $spacing-xs;
+            color: $white-color !important;
+            border-radius: 5px;
+
+            &:hover {
+              background-color: lighten($button-green-type1, 10%);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+@include respond-to(medium) {
+  .header-nav {
+    display: none;
+  }
+
+  .header-search {
+    display: none;
+  }
+}
+
+@include respond-to(small) {
+  .header-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    top: 70px;
+  }
+
+  .header-search {
+    display: block;
+    width: 100%;
+  }
+
+}

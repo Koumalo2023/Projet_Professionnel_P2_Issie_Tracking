@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+@import 'styles/settings/mixins';
+@import 'styles/components/components';
+@import 'styles/settings/variables.scss';
+
+@import 'styles/theme/layourt/dashboard/layourt.scss';
+@import 'styles/theme/layourt/auth/auth.scss';
+@import 'styles/theme/layourt/home/layourt.scss';

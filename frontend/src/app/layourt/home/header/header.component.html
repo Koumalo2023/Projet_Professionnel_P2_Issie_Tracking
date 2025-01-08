@@ -1,0 +1,52 @@
+<header class="site-header">
+  <div class="header-logo">
+    <a routerLink="/home">Issue Tracking System</a>
+  </div>
+
+  <nav class="header-nav">
+    <ul>
+      <li><a routerLink="/home"><i class="bi bi-house pe-2"></i> Accueil</a></li>
+      <li><a routerLink="/movie-list"><i class="bi bi-film pe-2"></i> Films</a></li>
+      <li><a routerLink="/reservation"><i class="bi bi-info-circle pe-2"></i> Reservation</a></li>
+      <li><a routerLink="/contacts"><i class="bi bi-envelope pe-2"></i> Contact</a></li>
+      
+      <!-- Menu Login / Profile & Logout -->
+      <li class="nav-item dropdown" *ngIf="!isLoggedIn">
+        <a routerLink="/login" class="nav-link"><i class="bi bi-person-circle pe-2"></i> Login</a>
+      </li>
+      
+      <li class="nav-item dropdown" *ngIf="isLoggedIn">
+        <a href="#" class="nav-link dropdown-toggle" (click)="toggleDropdown()" role="button">
+          <i class="bi bi-person-circle pe-2"></i> {{ username }}
+        </a>
+        <ul class="dropdown-menu" [ngClass]="{'show': isDropdownOpen}">
+          <li><a routerLink="/profile" class="dropdown-item"><i class="bi bi-person pe-2"></i> Profile</a></li>
+          <li><a href="#" (click)="logout()" class="dropdown-item"><i class="bi bi-box-arrow-right pe-2"></i> Logout</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <button class="mobile-toggle" (click)="toggleMenu()">
+    <i class="bi bi-list"></i>
+  </button>
+</header>
+
+<!-- Mobile Menu -->
+<nav class="mobile-nav" [ngClass]="{'active': isMenuOpen}">
+  <ul>
+    <li><a routerLink="/"><i class="bi bi-house pe-2"></i> Home</a></li>
+    <li><a routerLink="/movies"><i class="bi bi-film pe-2"></i> Movies</a></li>
+    <li><a routerLink="/about"><i class="bi bi-info-circle pe-2"></i> About Us</a></li>
+    <li><a routerLink="/contact"><i class="bi bi-envelope pe-2"></i> Contact</a></li>
+
+    <!-- Mobile view: Conditional Login / Profile & Logout -->
+    <li *ngIf="!isLoggedIn"><a routerLink="/login"><i class="bi bi-person-circle pe-2"></i> Login</a></li>
+    <li *ngIf="isLoggedIn">
+      <a (click)="toggleDropdownMobile()"><i class="bi bi-person-circle pe-2"></i> {{ username }}</a>
+      <ul *ngIf="isDropdownMobileOpen" class="mobile-submenu">
+        <li><a routerLink="/profile"><i class="bi bi-person pe-2"></i> Profile</a></li>
+        <li><a href="#" (click)="logout()"><i class="bi bi-box-arrow-right pe-2"></i> Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>

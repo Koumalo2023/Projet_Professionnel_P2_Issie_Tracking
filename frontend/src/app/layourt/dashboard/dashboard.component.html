@@ -1,0 +1,20 @@
+<div class="wrapper">
+    <app-navigation [isSidebarHidden]="isSidebarHidden"></app-navigation>
+    <div class="main">
+        <app-nav-bar (toggleSidebar)="onToggleSidebar()"></app-nav-bar>
+        <main class="content px-3 py-2">
+            <div class="container-fluid">
+                <router-outlet />
+            </div>
+        </main>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row text-muted">
+                    <div class="col-6 text-start my-4">
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+// Container principale du formulaire pour une largeur maximale
+.auth-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: $body-bg-color;
+  
+    .auth-wrapper {
+      max-width: 400px;
+      width: 100%;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      background-color: $body-bg-color-second;
+      border-radius: 8px;
+    }
+  
+    .auth-form {
+      width: 100%;
+      background-color: $body-bg-color-second;
+  
+      .card {
+        border: none;
+        width: 100%;
+        background-color: $body-bg-color-second;
+  
+        .card-body {
+          padding: 2rem;
+  
+          .form-floating {
+            width: 100%;
+            margin-bottom: 1.5rem;
+  
+            .form-control {
+              width: 100%;
+              padding: 1.25rem 1rem;
+              font-size: 1rem;
+              border: 1px solid $body-bg-color-second;
+              border-radius: 4px;
+  
+              &:focus {
+                border-color: #495057;
+                box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+              }
+            }
+  
+            label {
+              color: #6c757d;
+              font-size: 0.875rem;
+            }
+          }
+  
+          // Boutons
+          button[type="submit"] {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 4px;
+            background-color: $third-color;
+            color: #fff;
+            transition: background-color 0.3s ease;
+  
+            &:hover {
+              background-color: #5a6268;
+            }
+          }
+        }
+      }
+    }
+  }
+  

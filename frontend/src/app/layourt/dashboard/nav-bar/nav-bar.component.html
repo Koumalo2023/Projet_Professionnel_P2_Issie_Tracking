@@ -1,0 +1,33 @@
+<nav class="navbar navbar-container navbar-expand px-3">
+  <!-- Sidebar Toggle Button -->
+  <button class="btn btn-toggle" (click)="toggleSidebarVisibility()" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- User Menu Toggle -->
+  <div class="nav-item user-menu ms-auto" (clickOutside)="closeMenu()">
+    <button class="nav-link" (click)="toggleUserMenu($event)">
+      <i class="bi bi-person-circle"></i>
+    </button>
+
+    <!-- Custom Dropdown Menu (using *ngIf) -->
+    <div class="user-dropdown" *ngIf="isMenuOpen">
+      <!-- Welcome Message -->
+      <div class="dropdown-header">
+        Bienvenue, {{ userName }}
+      </div>
+      <div class="dropdown-divider"></div>
+
+      <!-- Profile Link -->
+      <a class="dropdown-item" [routerLink]="['/profile']">
+        <i class="bi bi-person"></i> Profile
+      </a>
+
+      <!-- Logout Link -->
+      <a class="dropdown-item" (click)="logout()">
+        <i class="bi bi-box-arrow-right"></i> Déconnexion
+      </a>
+    </div>
+  </div>
+</nav>
+
