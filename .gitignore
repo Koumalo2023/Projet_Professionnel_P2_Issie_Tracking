@@ -1,0 +1,89 @@
+# Fichiers de configuration de Visual Studio
+.vscode/
+*.AppUser
+*.suo
+*.AppUserosscache
+*.sln.docstates
+
+# Fichiers de construction (build)
+*.cache
+*.pdb
+*.ilk
+*.log
+*.obj/
+*.bin/
+*.exe
+*.dll
+*.sql
+*.sqlite
+*.mdf
+*.ldf
+
+# Dossier .vs de Visual Studio
+.vs/
+
+# Fichiers sp�cifiques � NuGet
+.nuget/
+*.nuget.dgspec.json
+*.nuget.cache
+
+# Fichiers AssemblyInfo
+*AssemblyInfo.cs
+
+# Fichiers Source Link
+*.sourceLink.json
+
+# Docker
+#docker-compose.yml
+#docker-compose.override.yml
+#*.dockerignore
+#**/Dockerfile
+#!Dockerfile* # Autoriser les Dockerfiles sp�cifiques
+
+# ASP.NET Core
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/appsettings.Production.json
+**/appsettings.Staging.json
+**/secrets.json
+**/certificates/
+**/.aspnet/https/
+
+# Logs
+*.log
+logs/
+!README.md 
+
+# Nunit
+TestResult.xml
+*.trx
+*.coverage
+
+# Node.js
+node_modules/
+
+# Bower
+bower_components/
+
+# Bundle files
+*.min.js
+*.min.css
+*.map
+
+# Entity Framework
+Migrations/*.designer.cs
+Migrations/*Snapshot.cs
+
+# Fichiers secrets (ASP.NET Core AppUser Secrets)
+**/secrets.json
+
+# JetBrains Rider
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# NuGet Packages et artefacts de build
+**/packages/
+**/obj/
+**/bin/
+global.json
