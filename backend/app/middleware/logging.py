@@ -1,10 +1,15 @@
 # app/middleware/logging.py
 import logging
-
-logging.basicConfig(filename="app.log", level=logging.INFO)
+from app.utils.logger import log_request, log_response
 
 async def log_requests(request, call_next):
-    logging.info(f"Request: {request.method} {request.url}")
+    # Log de la requête
+    log_request(request)
+    
+    # Exécution de la requête
     response = await call_next(request)
-    logging.info(f"Response: {response.status_code}")
+    
+    # Log de la réponse
+    log_response(request, response)
+    
     return response

@@ -60,6 +60,10 @@ app.log
 *.swp
 *.swo
 
+
+#fichier .md
+
+
 # Fichiers de système d'exploitation
 .DS_Store
 Thumbs.db
