@@ -1,0 +1,95 @@
+# Environnements virtuels Python
+venv/
+.env/
+.venv/
+ENV/
+
+# Fichiers de cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Fichiers de configuration sensibles
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+
+# Fichiers de base de données
+*.db
+*.sqlite
+*.sqlite3
+
+# Fichiers de log
+*.log
+logs/
+app.log
+
+# Fichiers de cache IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Fichiers de système d'exploitation
+.DS_Store
+Thumbs.db
+
+# Fichiers de test et couverture
+.coverage
+.tox/
+.nox/
+htmlcov/
+.pytest_cache/
+.coverage.*
+
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Fichiers de migration Alembic (sauf les versions)
+alembic/versions/*.py
+!alembic/versions/__init__.py
+
+# Fichiers de documentation générés
+docs/_build/
+
+# Fichiers de déploiement
+Dockerfile
+.dockerignore
+docker-compose.yml
+docker-compose.override.yml
+
+# Fichiers de build
+.cache
+.pytest_cache
+.mypy_cache
