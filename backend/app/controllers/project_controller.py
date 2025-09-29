@@ -9,10 +9,15 @@ from app.repositories.project_repository import ProjectRepository
 from app.database.dependencies import get_db
 from app.auth.auth_utils import get_current_user
 from app.models.user import User
+from app.auth.permission_decorators import (
+    can_create_project, can_read_project, can_update_project,
+    can_delete_project, project_member_required
+)
 
 router = APIRouter(prefix="/projects", tags=["projects"])
 
 @router.post("/projects", response_model=dict)
+@can_create_project
 def create_project(
     project: ProjectCreate,
     db: Session = Depends(get_db),
@@ -28,6 +33,7 @@ def get_all_projects(
     skip: int = Query(0, description="Nombre de projets à sauter"),
     limit: int = Query(10, description="Nombre de projets à retourner"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     project_repository = ProjectRepository()
     project_service = ProjectService(project_repository)
@@ -47,9 +53,11 @@ def get_all_projects(
     }
 
 @router.get("/projects/{project_id}", response_model=ProjectResponse)
+@can_read_project("project_id")
 def get_project(
     project_id: int,
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     project_repository = ProjectRepository()
     project_service = ProjectService(project_repository)
@@ -57,6 +65,7 @@ def get_project(
     return project
 
 @router.put("/projects/{project_id}", response_model=dict)
+@can_update_project("project_id")
 def update_project(
     project_id: int,
     project_update: ProjectUpdate,
@@ -69,6 +78,7 @@ def update_project(
     return {"message": "Project updated successfully"}
 
 @router.delete("/projects/{project_id}", response_model=dict)
+@can_delete_project("project_id")
 def delete_project(
     project_id: int,
     db: Session = Depends(get_db),

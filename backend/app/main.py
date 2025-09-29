@@ -4,6 +4,7 @@ from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer
 from app.middleware.logging import log_requests
 from app.middleware.exception_handler import global_exception_handler
+from app.middleware.authorization_middleware import authorization_middleware
 from app.utils.logger import setup_logging
 from app.controllers.auth_controller import router as auth_router
 from app.controllers.user_controller import router as user_router
@@ -30,6 +31,9 @@ app = FastAPI(
 
 # Ajoute le middleware de journalisation
 app.middleware("http")(log_requests)
+
+# Ajoute le middleware d'autorisation RBAC
+app.middleware("http")(authorization_middleware)
 
 # Ajoute le gestionnaire d'exceptions global
 app.add_exception_handler(Exception, global_exception_handler)

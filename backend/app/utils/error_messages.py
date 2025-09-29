@@ -1,6 +1,7 @@
 # app/utils/error_messages.py
 from typing import Dict, Optional
 
+
 # Catalogue des codes d'erreur et leurs messages
 ERROR_MESSAGES: Dict[str, str] = {
     # Catégorie Authentication (AUTH_*)
@@ -100,6 +101,7 @@ ERROR_MESSAGES: Dict[str, str] = {
     "TOO_MANY_REQUESTS": "Trop de requêtes",
 }
 
+
 def get_error_message(code: str, details: Optional[str] = None) -> dict:
     """
     Retourne un message d'erreur standardisé
@@ -109,6 +111,7 @@ def get_error_message(code: str, details: Optional[str] = None) -> dict:
         "message": ERROR_MESSAGES.get(code, "Erreur inconnue"),
         "details": details
     }
+
 
 def format_validation_error(field: str, error_type: str, details: Optional[str] = None) -> dict:
     """
@@ -127,6 +130,7 @@ def format_validation_error(field: str, error_type: str, details: Optional[str] 
         "details": details
     }
 
+
 # Mapping des codes HTTP vers les codes d'erreur métier
 HTTP_ERROR_MAPPING = {
     400: "BAD_REQUEST",
@@ -139,6 +143,7 @@ HTTP_ERROR_MAPPING = {
     500: "INTERNAL_SERVER_ERROR",
     503: "SERVICE_UNAVAILABLE",
 }
+
 
 def get_error_code_from_http_status(status_code: int) -> str:
     """

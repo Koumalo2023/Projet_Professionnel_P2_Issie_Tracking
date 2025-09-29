@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from typing import Optional
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Request
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from app.models.user import User
@@ -98,3 +98,28 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
             detail="User not found",
         )
     return user
+
+
+async def get_current_user_from_request(request: Request, db: Session) -> Optional[User]:
+    """
+    Récupère l'utilisateur courant à partir de la requête (pour le middleware).
+    """
+    try:
+        authorization = request.headers.get("Authorization")
+        if not authorization:
+            return None
+        
+        scheme, _, token = authorization.partition(' ')
+        if scheme.lower() != 'bearer':
+            return None
+        
+        payload = decode_token(token)
+        username: str = payload.get("sub")
+        if username is None:
+            return None
+        
+        user = db.query(User).filter(User.username == username).first()
+        return user
+        
+    except (HTTPException, JWTError):
+        return None

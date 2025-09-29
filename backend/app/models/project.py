@@ -11,7 +11,10 @@ class Project(Base):
     type = Column(String)
     author_id = Column(Integer, ForeignKey("users.id"))
 
-    # Relations
+    # Relations existantes
     author = relationship("User", back_populates="projects")
     issues = relationship("Issue", back_populates="project")
     contributors = relationship("Contributor", back_populates="project")
+    
+    # Nouvelles relations RBAC
+    project_roles = relationship("ProjectRole", back_populates="project")

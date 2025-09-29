@@ -16,8 +16,12 @@ class User(Base):
     can_be_contacted = Column(Boolean, default=False)
     can_data_be_shared = Column(Boolean, default=False)
 
-    # Relations
+    # Relations existantes
     projects = relationship("Project", back_populates="author")
     issues = relationship("Issue", back_populates="author")
     comments = relationship("Comment", back_populates="author")
     contributions = relationship("Contributor", back_populates="user")
+    
+    # Nouvelles relations RBAC
+    user_roles = relationship("UserRole", back_populates="user")
+    project_roles = relationship("ProjectRole", back_populates="user")

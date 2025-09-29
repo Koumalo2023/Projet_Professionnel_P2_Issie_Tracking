@@ -9,10 +9,15 @@ from app.repositories.comment_repository import CommentRepository
 from app.database.dependencies import get_db
 from app.auth.auth_utils import get_current_user
 from app.models.user import User
+from app.auth.permission_decorators import (
+    can_create_comment, can_read_comment, can_update_comment,
+    can_delete_comment, project_member_required
+)
 
 router = APIRouter(prefix="/comments", tags=["comments"])
 
 @router.post("/projects/{project_id}/issues/{issue_id}/comments", response_model=dict)
+@can_create_comment("project_id")
 def create_comment(
     project_id: int,
     issue_id: int,
@@ -26,12 +31,14 @@ def create_comment(
     return {"comment_id": db_comment.id, "message": "Comment added successfully"}
 
 @router.get("/projects/{project_id}/issues/{issue_id}/comments", response_model=dict)
+@can_read_comment("project_id")
 def get_all_comments(
     project_id: int,
     issue_id: int,
     skip: int = Query(0, description="Nombre de commentaires à sauter"),
     limit: int = Query(10, description="Nombre de commentaires à retourner"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     comment_repository = CommentRepository()
     comment_service = CommentService(comment_repository)
@@ -46,11 +53,13 @@ def get_all_comments(
     }
 
 @router.get("/projects/{project_id}/issues/{issue_id}/comments/{comment_id}", response_model=CommentResponse)
+@can_read_comment("project_id")
 def get_comment(
     project_id: int,
     issue_id: int,
     comment_id: int,
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     comment_repository = CommentRepository()
     comment_service = CommentService(comment_repository)
@@ -58,6 +67,7 @@ def get_comment(
     return comment
 
 @router.put("/projects/{project_id}/issues/{issue_id}/comments/{comment_id}", response_model=dict)
+@can_update_comment("project_id")
 def update_comment(
     project_id: int,
     issue_id: int,
@@ -72,6 +82,7 @@ def update_comment(
     return {"message": "Comment updated successfully"}
 
 @router.delete("/projects/{project_id}/issues/{issue_id}/comments/{comment_id}", response_model=dict)
+@can_delete_comment("project_id")
 def delete_comment(
     project_id: int,
     issue_id: int,

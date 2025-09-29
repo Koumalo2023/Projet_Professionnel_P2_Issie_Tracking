@@ -9,10 +9,15 @@ from app.repositories.issue_repository import IssueRepository
 from app.database.dependencies import get_db
 from app.auth.auth_utils import get_current_user
 from app.models.user import User
+from app.auth.permission_decorators import (
+    can_create_issue, can_read_issue, can_update_issue,
+    can_delete_issue, project_member_required
+)
 
 router = APIRouter(prefix="/issues", tags=["issues"])
 
 @router.post("/projects/{project_id}/issues", response_model=dict)
+@can_create_issue("project_id")
 def create_issue(
     project_id: int,
     issue: IssueCreate,
@@ -25,11 +30,13 @@ def create_issue(
     return {"issue_id": db_issue.id, "message": "Issue created successfully"}
 
 @router.get("/projects/{project_id}/issues", response_model=dict)
+@can_read_issue("project_id")
 def get_all_issues(
     project_id: int,
     skip: int = Query(0, description="Nombre d'issues à sauter"),
     limit: int = Query(10, description="Nombre d'issues à retourner"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     issue_repository = IssueRepository()
     issue_service = IssueService(issue_repository)
@@ -52,10 +59,12 @@ def get_all_issues(
     }
 
 @router.get("/projects/{project_id}/issues/{issue_id}", response_model=IssueResponse)
+@can_read_issue("project_id")
 def get_issue(
     project_id: int,
     issue_id: int,
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     issue_repository = IssueRepository()
     issue_service = IssueService(issue_repository)
@@ -63,6 +72,7 @@ def get_issue(
     return issue
 
 @router.put("/projects/{project_id}/issues/{issue_id}", response_model=dict)
+@can_update_issue("project_id")
 def update_issue(
     project_id: int,
     issue_id: int,
@@ -76,6 +86,7 @@ def update_issue(
     return {"message": "Issue updated successfully"}
 
 @router.delete("/projects/{project_id}/issues/{issue_id}", response_model=dict)
+@can_delete_issue("project_id")
 def delete_issue(
     project_id: int,
     issue_id: int,

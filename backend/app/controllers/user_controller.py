@@ -6,7 +6,9 @@ from app.schemas.user_schema import UserCreate, UserLogin, UserResponse, UserUpd
 from app.services.user_service import UserService
 from app.repositories.user_repository import UserRepository
 from app.database.dependencies import get_db
-from app.auth.auth_utils import create_access_token, verify_password
+from app.auth.auth_utils import create_access_token, verify_password, get_current_user
+from app.models.user import User
+from app.auth.permission_decorators import admin_required
 
 router = APIRouter(prefix="/users", tags=["users"])
 
@@ -33,10 +35,12 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
 
 
 @router.get("/users", response_model=List[UserResponse])
+@admin_required
 def get_all_users(
     skip: int = Query(0, description="Nombre d'utilisateurs à sauter"),
     limit: int = Query(10, description="Nombre d'utilisateurs à retourner"),
     db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ):
     user_repository = UserRepository()
     user_service = UserService(user_repository)
@@ -44,21 +48,37 @@ def get_all_users(
     return users
 
 @router.get("/users/{user_id}", response_model=UserResponse)
-def get_user(user_id: int, db: Session = Depends(get_db)):
+@admin_required
+def get_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     user_repository = UserRepository()
     user_service = UserService(user_repository)
     db_user = user_service.get_user_by_id(user_id, db)
     return db_user
 
 @router.put("/users/{user_id}", response_model=dict)
-def update_user(user_id: int, user_update: UserUpdate, db: Session = Depends(get_db)):
+@admin_required
+def update_user(
+    user_id: int,
+    user_update: UserUpdate,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     user_repository = UserRepository()
     user_service = UserService(user_repository)
     updated_user = user_service.update_user(user_id, user_update, db)
     return {"message": "User updated successfully"}
 
 @router.delete("/users/{user_id}", response_model=dict)
-def delete_user(user_id: int, db: Session = Depends(get_db)):
+@admin_required
+def delete_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
     user_repository = UserRepository()
     user_service = UserService(user_repository)
     user_service.delete_user(user_id, db)
