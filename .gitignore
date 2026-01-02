@@ -1,89 +1,189 @@
-# Fichiers de configuration de Visual Studio
-.vscode/
-*.AppUser
-*.suo
-*.AppUserosscache
-*.sln.docstates
+# ============================================
+# Python / FastAPI
+# ============================================
 
-# Fichiers de construction (build)
-*.cache
-*.pdb
-*.ilk
-*.log
-*.obj/
-*.bin/
-*.exe
-*.dll
-*.sql
+# Environnements virtuels Python
+venv/
+.env/
+.venv/
+ENV/
+env/
+
+# Fichiers de cache Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Fichiers de configuration sensibles
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+.env.*
+!.env.example
+
+# Fichiers de base de données
+*.db
 *.sqlite
-*.mdf
-*.ldf
+*.sqlite3
 
-# Dossier .vs de Visual Studio
-.vs/
-
-# Fichiers sp�cifiques � NuGet
-.nuget/
-*.nuget.dgspec.json
-*.nuget.cache
-
-# Fichiers AssemblyInfo
-*AssemblyInfo.cs
-
-# Fichiers Source Link
-*.sourceLink.json
-
-# Docker
-#docker-compose.yml
-#docker-compose.override.yml
-#*.dockerignore
-#**/Dockerfile
-#!Dockerfile* # Autoriser les Dockerfiles sp�cifiques
-
-# ASP.NET Core
-**/appsettings.Development.json
-**/appsettings.Local.json
-**/appsettings.Production.json
-**/appsettings.Staging.json
-**/secrets.json
-**/certificates/
-**/.aspnet/https/
-
-# Logs
+# Fichiers de log
 *.log
 logs/
-!README.md 
+app.log
 
-# Nunit
-TestResult.xml
-*.trx
+# Fichiers de cache IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Fichiers de système d'exploitation
+.DS_Store
+Thumbs.db
+
+# Fichiers de test et couverture
+.coverage
+.tox/
+.nox/
+htmlcov/
+.pytest_cache/
+.coverage.*
+test-results/
 *.coverage
 
-# Node.js
+# Fichiers temporaires
+*.tmp
+*.temp
+
+# Fichiers de migration Alembic (sauf les versions)
+alembic/versions/*.py
+!alembic/versions/__init__.py
+
+# Fichiers de documentation générés
+docs/_build/
+
+# Fichiers de déploiement
+Dockerfile
+.dockerignore
+docker-compose.yml
+docker-compose.override.yml
+
+# Fichiers de build
+.cache
+.pytest_cache
+.mypy_cache
+.hypothesis/
+
+# Fichiers Jupyter Notebook
+.ipynb_checkpoints/
+
+# Fichiers mypy
+.mypy_cache/
+
+# Fichiers de profiling
+*.prof
+*.line_profiler
+
+# ============================================
+# Documentations (à ne pas commiter)
+# ============================================
+documentations/
+
+# ============================================
+# Général / Multi-langage
+# ============================================
+
+# Fichiers de compilation
+*.class
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+*.old
+
+# Fichiers de verrouillage
+*.lock
+
+# Fichiers de métadonnées système
+*.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+[Tt]humbs.db
+
+# Fichiers de cache divers
+.cache/
+*.cache
+
+# Fichiers de package managers
 node_modules/
-
-# Bower
 bower_components/
+.pnpm-store/
 
-# Bundle files
-*.min.js
-*.min.css
-*.map
+# Fichiers de build frontend (au cas où)
+dist/
+build/
+out/
+.next/
+.nuxt/
+.gatsby/
 
-# Entity Framework
-Migrations/*.designer.cs
-Migrations/*Snapshot.cs
+# Fichiers de coverage
+coverage/
+.nyc_output/
 
-# Fichiers secrets (ASP.NET Core AppUser Secrets)
-**/secrets.json
+# Fichiers de déploiement
+*.tar.gz
+*.zip
+*.rar
 
-# JetBrains Rider
-.idea/
-*.sublime-workspace
-*.sublime-project
+# Fichiers de logs serveur
+*.pid
+*.seed
+*.pid.lock
 
-# NuGet Packages et artefacts de build
-**/packages/
-**/obj/
-**/bin/
-global.json
+# Fichiers de configuration locale
+local.config.*
+config.local.*
+
+# Fichiers de secrets
+secrets.**
+*.pem
+*.key
+*.crt
+*.csr
